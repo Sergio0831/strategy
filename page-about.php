@@ -44,53 +44,36 @@
 
         <div class="row templateux-section">
             <div class="col-md-12 clearfix mb-5">
+                <?php
+                $aboutpageTeam = new WP_Query([
+                    'post_type'   => 'team',
+                ])
+                ?>
                 <h2>Team</h2>
             </div>
+            <?php
+
+                while( $aboutpageTeam->have_posts() ){
+                    $aboutpageTeam->the_post()?>
+
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="block-38 ">
                     <div class="block-38-img">
                         <div class="block-38-header">
-                            <img src="images/person_1.jpg" alt="Image placeholder">
-                            <h3 class="block-38-heading">Elizabeth Graham</h3>
-                            <p class="block-38-subheading">CEO, Founder</p>
+                            <img src="<?php echo get_the_post_thumbnail_url(null, 'post-thumbnail'); ?>">
+                            <h3 class="block-38-heading"><?php the_title(); ?></h3>
+                            <p class="block-38-subheading"><?php echo get_post_meta(get_the_ID(), "position", true ) ?>
+                            </p>
                         </div>
                         <div class="block-38-body">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit
-                                distinctio recusandae doloribus ut fugit officia voluptate soluta. </p>
+                            <p><?php the_content(); ?></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="block-38 ">
-                    <div class="block-38-img">
-                        <div class="block-38-header">
-                            <img src="images/person_2.jpg" alt="Image placeholder">
-                            <h3 class="block-38-heading">Amanda Gold</h3>
-                            <p class="block-38-subheading">Co-Founder</p>
-                        </div>
-                        <div class="block-38-body">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit
-                                distinctio recusandae doloribus ut fugit officia voluptate soluta. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="block-38 ">
-                    <div class="block-38-img">
-                        <div class="block-38-header">
-                            <img src="images/person_3.jpg" alt="Image placeholder">
-                            <h3 class="block-38-heading">Chris Stanworth</h3>
-                            <p class="block-38-subheading">Co-Founder</p>
-                        </div>
-                        <div class="block-38-body">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit
-                                distinctio recusandae doloribus ut fugit officia voluptate soluta. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            <?php } wp_reset_postdata(); ?>
+
         </div>
     </div>
 
@@ -98,9 +81,12 @@
         <div class="row">
             <div class="col-md-12" data-aos="fade-up">
                 <div class="owl-carousel dots-overlap wide-slider">
-                    <div class="item"><img src="images/hero_1.jpg" alt="Free Template" class="img-fluid"></div>
-                    <div class="item"><img src="images/hero_2.jpg" alt="Free Template" class="img-fluid"></div>
-                    <div class="item"><img src="images/hero_3.jpg" alt="Free Template" class="img-fluid"></div>
+                    <div class="item"><img src="<?php echo get_theme_file_uri( "assets/images/hero_1.jpg" ) ?>"
+                            alt="Free Template" class="img-fluid"></div>
+                    <div class="item"><img src="<?php echo get_theme_file_uri( "assets/images/hero_2.jpg" ) ?>"
+                            alt="Free Template" class="img-fluid"></div>
+                    <div class="item"><img src="<?php echo get_theme_file_uri( "assets/images/hero_3.jpg" ) ?>"
+                            alt="Free Template" class="img-fluid"></div>
                 </div>
             </div>
         </div>
@@ -109,5 +95,44 @@
     </div>
 </section>
 <!-- END section -->
+
+<section class="templateux-section">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 clearfix mb-5" data-aos="fade-up">
+                <?php
+                $experts = new WP_Query([
+                    'post_type'   => 'experts',
+                    'order' => 'ASC',
+                ])
+                ?>
+                <h2>We Are Experts</h2>
+            </div>
+        </div>
+        <div class="row">
+            <?php 
+                  while($experts->have_posts()) {
+                    $experts->the_post() ?>
+
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="media templateux-media mb-4">
+                    <div class="mr-4 icon">
+                        <span class="<?php echo get_post_meta(get_the_ID(), "icon", true ) ?> display-3"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="h5"><?php the_title(); ?></h3>
+                        <p><?php the_content(); ?></p>
+                    </div>
+                </div>
+            </div>
+
+            <?php }  wp_reset_postdata(); ?>
+
+        </div>
+        <!-- END row -->
+    </div>
+</section>
 
 <?php get_footer(); ?>

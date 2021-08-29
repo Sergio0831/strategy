@@ -1,20 +1,11 @@
-<html lang="en">
+<html <?php language_attributes(); ?>>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="<?php bloginfo('charset') ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Strategy &mdash; Free Portfolio Template by Colorlib</title>
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/aos.min.css">
-    <link rel="stylesheet" href="css/hamburgers/hamburgers.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link rel="stylesheet" href="css/animsition.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
+    <title><?php wp_title(); ?></title>
     <?php wp_head(); ?>
 
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 
 <body>
@@ -26,7 +17,7 @@
                 <div class="row">
                     <div class="col-sm-3 col-3">
                         <div class="site-logo"><a <?php if(is_page("about")) echo "class='text-white'" ?>
-                                href="index.html" class="animsition-link">Strategy</a></div>
+                                href="<?php echo site_url("/") ?>" class="animsition-link">Strategy</a></div>
                     </div>
                     <div class="col-sm-9 col-9 text-right">
 
@@ -38,17 +29,19 @@
 
                         <nav class="templateux-menu js-templateux-menu" role="navigation">
                             <ul class="list-unstyled">
-                                <li class="d-md-none d-block active"><a
-                                        <?php if(is_page("about")) echo "class='text-white'" ?> href="index.html"
-                                        class="animsition-link">Home</a></li>
-                                <li><a <?php if(is_page("about")) echo "class='text-white'" ?> href="work.html"
-                                        class="animsition-link">Work</a></li>
-                                <li><a <?php if(is_page("about")) echo "class='text-white'" ?> href="about.html"
-                                        class="animsition-link">About</a></li>
-                                <li><a <?php if(is_page("about")) echo "class='text-white'" ?> href="blog.html"
-                                        class="animsition-link">Blog</a></li>
-                                <li><a <?php if(is_page("about")) echo "class='text-white'" ?> href="contact.html"
-                                        class="animsition-link">Contact</a></li>
+                                <li <?php if (is_page("portfolio")) echo "class='active'" ?>><a
+                                        <?php if(is_page("about")) echo "class='text-white'" ?>
+                                        href="<?php echo site_url("portfolio")?>" class="animsition-link">Work</a></li>
+                                <li <?php if (is_page("about")) echo "class='active'" ?>><a
+                                        <?php if(is_page("about")) echo "class='text-white'" ?>
+                                        href="<?php echo site_url("/about")?>" class="animsition-link">About</a></li>
+                                <li <?php if (get_post_type() == "post") echo "class='active'" ?>><a
+                                        <?php if(is_page("about")) echo "class='text-white'" ?>
+                                        href="<?php echo site_url("/blog")?>" class="animsition-link">Blog</a></li>
+                                <li <?php if (is_page("contact")) echo "class='active'" ?>><a
+                                        <?php if(is_page("about")) echo "class='text-white'" ?>
+                                        href="<?php echo site_url("/contact")?>" class="animsition-link">Contact</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>

@@ -23,8 +23,11 @@ function strategy_assets() {
 
 add_action( 'wp_enqueue_scripts', 'strategy_assets' );
 
-show_admin_bar(false);
+function strategy_features() {
+    show_admin_bar(false);
+    add_theme_support("post-thumbnails");
+    add_theme_support( "title_tag" );
+    add_theme_support( "post-thumbnails", ["portfolio"] );
+}
 
-add_theme_support("post-thumbnails");
-
-add_theme_support( "post-thumbnails", ["portfolio"] );
+add_action("after_setup_theme", "strategy_features");
